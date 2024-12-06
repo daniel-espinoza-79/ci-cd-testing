@@ -18,34 +18,34 @@ jobs:
       - name: Build and push user-service image
         uses: docker/build-push-action@v4
         with:
-          context: merchant-api/UserService/
+          context: UserService/
           push: true
           tags: danielespinoza/user-service:v1.0.0
 
       - name: Build and push inventory-service image
         uses: docker/build-push-action@v4
         with:
-          context: merchant-api/InventoryService/
+          context: InventoryService/
           push: true
           tags: danielespinoza/inventory-service:v1.0.0
 
       - name: Build and push payment-service image
         uses: docker/build-push-action@v4
         with:
-          context: merchant-api/PaymentService/
+          context: PaymentService/
           push: true
           tags: danielespinoza/payment-service:v1.0.0
 
       - name: Build and push notification-service image
         uses: docker/build-push-action@v4
         with:
-          context: merchant-api/NotificationService/
+          context: NotificationService/
           push: true
           tags: danielespinoza/notification-service:v1.0.0
 
       - name: Build and push api-gateway image
         uses: docker/build-push-action@v4
         with:
-          context: merchant-api/ApiGateway/
+          context: ApiGateway/
           push: true
           tags: danielespinoza/api-gateway:v1.0.0
