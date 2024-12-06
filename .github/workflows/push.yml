@@ -19,7 +19,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: merchant-api/
-          file: ./UserService/Dockerfile
+          file: ./merchant-api/UserService/Dockerfile
           push: true
           tags: danielespinoza/user-service:v1.0.0
 
