@@ -15,10 +15,10 @@ RUN dotnet restore
 COPY ../NotificationService/src/NotificationService.Domain/. /app/NotificationService/src/NotificationService.Domain/
 COPY ../MerchantCommon/RabbitMqMessaging/. /app/MerchantCommon/RabbitMqMessaging/
 COPY ../MerchantCommon/Commons/. /app/MerchantCommon/Commons/
-COPY UserService/src/UserService.Api/. UserService.Api/
-COPY UserService/src/UserService.Application/. ../UserService.Application/
-COPY UserService/src/UserService.Infrastructure/. ../UserService.Infrastructure/
-COPY UserService/src/UserService.Domain/. ../UserService.Domain/
+COPY UserService/src/UserService.Api/. /app/UserService/src/UserService.Api/
+COPY UserService/src/UserService.Application/. /app/UserService/src/UserService.Application/
+COPY UserService/src/UserService.Infrastructure/. /app/UserService/src/UserService.Infrastructure/
+COPY UserService/src/UserService.Domain/. /app/UserService/src/UserService.Domain/
 
 RUN dotnet publish -c Release -o /app/out
 
