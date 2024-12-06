@@ -18,14 +18,14 @@ jobs:
       - name: Build and push user-service image
         uses: docker/build-push-action@v4
         with:
-          context: UserService/
+          context: ./UserService/
           push: true
           tags: danielespinoza/user-service:v1.0.0
 
       - name: Build and push inventory-service image
         uses: docker/build-push-action@v4
         with:
-          context: InventoryService/
+          context: ./InventoryService/
           push: true
           tags: danielespinoza/inventory-service:v1.0.0
 
