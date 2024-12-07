@@ -59,6 +59,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: merchant-api/
-          file: ./merchant-api/ApiGateway/Dockerfile
+          file: ./merchant-api/MigrationsConfig/Dockerfile
           push: true
           tags: danielespinoza/migrations:v1.0.0
