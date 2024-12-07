@@ -1,5 +1,6 @@
 services:
   user_service_db:
+    container_name: "user_service_db"
     image: postgres:latest
     restart: always
     ports:
@@ -12,8 +13,15 @@ services:
       - user_db:/var/lib/postgresql/data
     networks:
       - merchant-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   inventory_service_db:
+    container_name: "inventory_service_db"
     image: postgres:latest
     restart: always
     ports:
@@ -26,8 +34,15 @@ services:
       - inventory_db:/var/lib/postgresql/data
     networks:
       - merchant-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   payment_service_db:
+    container_name: "payment_service_db"
     image: postgres:latest
     restart: always
     ports:
@@ -40,6 +55,12 @@ services:
       - payment_db:/var/lib/postgresql/data
     networks:
       - merchant-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   rabbitmq:
     container_name: "rabbitmq"

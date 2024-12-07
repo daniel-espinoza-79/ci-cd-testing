@@ -83,7 +83,6 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-    tty: true
 
   payment_service:
     build:
@@ -161,7 +160,7 @@ services:
       - merchant-network
     depends_on:
       - postgres
-      
+
 networks:
   merchant-network:
     driver: bridge

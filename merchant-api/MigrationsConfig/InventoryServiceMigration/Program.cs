@@ -19,7 +19,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<InventoryD
     public InventoryDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<InventoryDbContext>();
-        optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("INVENTORY_POSTGRES_SQL_CONNECTION") ?? throw new("INVENTORY_POSTGRES_SQL_CONNECTION environment variable is not set."),
+        optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("INVENTORY_SERVICE_CONNECTION_STRING") ?? throw new("INVENTORY_SERVICE_CONNECTION_STRING environment variable is not set."),
             b => b.MigrationsAssembly("InventoryServiceMigration"))
                       .LogTo(Console.WriteLine, LogLevel.Information);
         return new InventoryDbContext(optionsBuilder.Options);

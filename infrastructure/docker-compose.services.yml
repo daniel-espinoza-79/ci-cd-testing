@@ -24,7 +24,6 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-    tty: true
 
   payment_service:
     image: danielespinoza/payment-service:v1.0.0

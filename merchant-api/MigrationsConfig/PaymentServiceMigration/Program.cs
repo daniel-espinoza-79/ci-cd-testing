@@ -18,7 +18,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<PaymentDbC
     PaymentDbContext IDesignTimeDbContextFactory<PaymentDbContext>.CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<PaymentDbContext>();
-        optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("PAYMENT_POSTGRES_SQL_CONNECTION") ?? throw new("PAYMENT_POSTGRES_SQL_CONNECTION environment variable is not set."),
+        optionsBuilder.UseNpgsql(Environment.GetEnvironmentVariable("PAYMENT_SERVICE_CONNECTION_STRING") ?? throw new("PAYMENT_SERVICE_CONNECTION_STRING environment variable is not set."),
             b => b.MigrationsAssembly("PaymentServiceMigration"))
                       .LogTo(Console.WriteLine, LogLevel.Information);
         return new PaymentDbContext(optionsBuilder.Options);

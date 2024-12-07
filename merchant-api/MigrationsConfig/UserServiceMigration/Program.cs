@@ -19,7 +19,7 @@ public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<PostgresCo
 
         var optionsBuilder = new DbContextOptionsBuilder<PostgresContext>();
         optionsBuilder.UseNpgsql(
-            Environment.GetEnvironmentVariable("USER_POSTGRES_SQL_CONNECTION") ?? throw new ("USER_POSTGRES_SQL_CONNECTION was not set"),
+            Environment.GetEnvironmentVariable("USER_SERVICE_CONNECTION_STRING") ?? throw new ("USER_SERVICE_CONNECTION_STRING was not set"),
             b => b.MigrationsAssembly("UserServiceMigration"))
             .LogTo(Console.WriteLine, LogLevel.Information);
         return new PostgresContext(optionsBuilder.Options);
