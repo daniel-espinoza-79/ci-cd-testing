@@ -1,11 +1,11 @@
 using InventoryService.Api;
 using DotNetEnv;
-using InventoryService.Intraestructure.Data;
 using InventoryService.Application;
 using InventoryService.Application.Profiles;
 using InventoryService.Application.ValidatorSettings;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using InventoryService.Intraestructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 Env.Load("../../../.env");

@@ -1,0 +1,3 @@
+networks:
+  merchant-network:
+    driver: bridge

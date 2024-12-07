@@ -1,0 +1,82 @@
+services:
+  api_gateway:
+    image: danielespinoza/api-gateway:v1.0.0
+    ports:
+      - "5001:8080"
+    environment:
+      - AUTH_JWT_AUTHORITY=${AUTH_JWT_AUTHORITY}
+      - AUTH_JWT_AUDIENCE=${AUTH_JWT_AUDIENCE}
+    networks:
+      - merchant-network
+
+  inventory_service:
+    image: danielespinoza/inventory-service:v1.0.0
+    ports:
+      - "5200:8080"
+    environment:
+      - POSTGRES_SQL_CONNECTION=${INVENTORY_SERVICE_CONNECTION_STRING}
+      - RABBITMQ_CONNECTION_STRING=${RABBITMQ_CONNECTION_STRING}
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_PASS=${RABBITMQ_PASS}
+      - API_GATEWAY_ROUTE=${API_GATEWAY_ROUTE}
+    networks:
+      - merchant-network
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    tty: true
+
+  payment_service:
+    image: danielespinoza/payment-service:v1.0.0
+    ports:
+      - "5300:8080"
+    environment:
+      - POSTGRES_SQL_CONNECTION=${PAYMENT_SERVICE_CONNECTION_STRING}
+      - INVENTORY_SERVICE_ROUTE=${INVENTORY_SERVICE_ROUTE}
+      - ORIGIN_ROUTE=${ORIGIN_ROUTE}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
+      - STRIPE_FAILED_URL=${STRIPE_FAILED_URL}
+      - RABBITMQ_CONNECTION_STRING=${RABBITMQ_CONNECTION_STRING}
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_PASS=${RABBITMQ_PASS}
+    networks:
+      - merchant-network
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  user_service:
+    image: danielespinoza/user-service:v1.0.0
+    ports:
+      - "5100:8080"
+    environment:
+      - POSTGRES_SQL_CONNECTION=${USER_SERVICE_CONNECTION_STRING}
+      - FIREBASE_CREDENTIALS=${FIREBASE_CREDENTIALS}
+      - RABBITMQ_CONNECTION_STRING=${RABBITMQ_CONNECTION_STRING}
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_PASS=${RABBITMQ_PASS}
+      - ADMIN_PANEL_URL=${ADMIN_PANEL_URL}
+    networks:
+      - merchant-network
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  notification_service:
+    image: danielespinoza/notification-service:v1.0.0
+    ports:
+      - "5400:8080"
+    environment:
+      - EMAIL_USERNAME=${EMAIL_USERNAME}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - EMAIL_SERVICE=${EMAIL_SERVICE}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - RABBITMQ_CONNECTION_STRING=${RABBITMQ_CONNECTION_STRING}
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_PASS=${RABBITMQ_PASS}
+    networks:
+      - merchant-network
+    depends_on:
+      rabbitmq:
+        condition: service_healthy

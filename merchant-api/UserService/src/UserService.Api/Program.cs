@@ -4,9 +4,9 @@ using UserService.Api;
 using Microsoft.AspNetCore.Diagnostics;
 using UserService.Application;
 using DotNetEnv;
+using UserService.Application.ValidatorSettings;
 using Microsoft.EntityFrameworkCore;
 using UserService.Infrastructure.Context;
-using UserService.Application.ValidatorSettings;
 
 var builder = WebApplication.CreateBuilder(args);
 

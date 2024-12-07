@@ -1,0 +1,19 @@
+# Excluir archivos binarios y temporales
+bin/
+obj/
+*.log
+
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+test/
+tests/
+node_modules/
+*.md
+
+.docker/
+
+Migrations/
+Migration/

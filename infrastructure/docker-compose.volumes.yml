@@ -1,0 +1,5 @@
+volumes:
+  user_db:
+  inventory_db:
+  payment_db:
+  rabbitmq_data:
