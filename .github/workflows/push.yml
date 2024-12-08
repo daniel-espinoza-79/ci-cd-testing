@@ -37,7 +37,7 @@ jobs:
           context: merchant-api/
           file: ./merchant-api/PaymentService/Dockerfile
           push: true
-          tags: danielespinoza/payment-service:v1.0.2
+          tags: danielespinoza/payment-service:v1.0.3
 
       - name: Build and push notification-service image
         uses: docker/build-push-action@v4
