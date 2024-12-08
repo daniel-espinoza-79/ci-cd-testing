@@ -81,3 +81,17 @@ services:
       start_period: 10s
     networks:
       - merchant-network
+
+  stripe-cli:
+    image: stripe/stripe-cli:latest
+    container_name: stripe-cli
+    environment:
+      STRIPE_API_KEY: ${STRIPE_SECRET_KEY}  
+      STRIPE_DEVICE_NAME: "MyDockerStripeCLI"
+    entrypoint: ["stripe", "listen", "--api-key", "${STRIPE_SECRET_KEY}"]
+    networks:
+      - merchant-network
+    restart: unless-stopped
+    depends_on:
+      merchant-payment-service:
+        condition: service_healthy

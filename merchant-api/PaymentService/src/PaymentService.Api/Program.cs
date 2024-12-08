@@ -23,6 +23,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.ConfigureSwagger();
 builder.Services.AddApplication();
 builder.Services.AddHttpClient();
+builder.Services.AddHealthChecks();
+
 
 var connectionString = builder.Configuration["POSTGRES_SQL_CONNECTION"] ?? 
                        throw new ArgumentNullException("POSTGRES_SQL_CONNECTION environment variable is not set.");
@@ -53,6 +55,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapHealthChecks("/health");
 app.MapControllers();
 app.UseCors("AllowApiGateway");
 app.UseAuthentication();
