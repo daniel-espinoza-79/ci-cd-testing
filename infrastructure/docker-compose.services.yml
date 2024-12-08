@@ -52,9 +52,9 @@ services:
         condition: service_healthy
     healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
-        interval: 30s 
+        interval: 10s 
         timeout: 5s
-        retries: 3
+        retries: 5
         start_period: 10s 
 
   user_service:
@@ -94,4 +94,20 @@ services:
       - merchant-network
     depends_on:
       rabbitmq:
+        condition: service_healthy
+
+
+
+  stripe-cli:
+    image: stripe/stripe-cli:latest
+    container_name: stripe-cli
+    environment:
+      STRIPE_API_KEY: ${STRIPE_SECRET_KEY}  
+      STRIPE_DEVICE_NAME: "StripeCLI-Dev"
+    entrypoint: ["stripe", "listen", "--api-key", "${STRIPE_SECRET_KEY}", "--forward-to", "http://api_gateway:8080/api/payment/Stripe/web-hook/register-web-hook-event"]
+    networks:
+      - merchant-network
+    restart: unless-stopped
+    depends_on:
+      payment_service:
         condition: service_healthy
