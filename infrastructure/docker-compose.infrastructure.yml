@@ -81,3 +81,19 @@ services:
       start_period: 10s
     networks:
       - merchant-network
+
+
+
+  stripe-cli:
+    image: stripe/stripe-cli:latest
+    container_name: stripe-cli
+    environment:
+      STRIPE_API_KEY: ${STRIPE_SECRET_KEY}  
+      STRIPE_DEVICE_NAME: "StripeCLI-Dev"
+    entrypoint: ["stripe", "listen", "--api-key", "${STRIPE_SECRET_KEY}", "--forward-to", "${STRIPE_ENDPOINT_WEBHOOK}"]
+    networks:
+      - merchant-network
+    restart: unless-stopped
+    depends_on:
+      payment_service:
+        condition: service_healthy

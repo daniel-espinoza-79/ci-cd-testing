@@ -13,7 +13,7 @@ string hostUrl = builder.Configuration["WebHostUrl"] ?? "http://localhost:3000";
 builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowAllOrigins",
-            builder => builder.WithOrigins(hostUrl)
+            builder => builder.WithOrigins(["http://192.168.0.15:3000", "http://localhost:3000"])
                               .AllowAnyMethod()
                               .AllowAnyHeader());
     });

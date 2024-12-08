@@ -1,0 +1,39 @@
+.quantity-picker {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.quantity-picker-button {
+  width: 30px;
+  height: 30px;
+  background-color: var(--background-secondary);
+  border: none;
+  color: var(--primary-600);
+  font-size: var(--normal-1-text-size);
+  cursor: pointer;
+  text-align: center;
+  line-height: 30px;
+  transition: all 0.3s ease;
+}
+
+.quantity-picker-button:hover {
+  background-color: var(--primary-600);
+  color: var(--tertiary-400);
+}
+
+#quantity-picker-input {
+  width: 60px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  font-size: var(--normal-1-text-size);
+  color: var(--primary-600);
+}

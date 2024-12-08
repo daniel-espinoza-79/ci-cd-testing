@@ -1,0 +1,54 @@
+.product-popup-header {
+  width: 100%;
+  color: var(--secondary-400);
+}
+
+.product-popup-name {
+  font-size: var(--heading-2-text-size);
+  color: var(--primary-600);
+}
+
+.product-popup-variants-section {
+  width: 100%;
+  min-height: 300px;
+  height: auto;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px 0;
+}
+
+.product-popup-footer {
+  display: grid;
+  grid-template-columns: 200px auto;
+  gap: 10px;
+}
+
+.product-popup-footer-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.product-popup-footer-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  gap: 10px;
+}
+
+.view-product-button {
+  width: 100%;
+  min-height: 30px;
+  background-color: var(--primary-light);
+  border: none;
+  color: var(--background-light-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border-radius: 10px;
+  font-size: var(--normal-1-text-size);
+  cursor: pointer;
+}

@@ -1,0 +1,8 @@
+services:
+  merchant_web:
+    container_name: merchant-web
+    image: danielespinoza/merchant-web:v1.0.1
+    ports:
+      - "3000:80"
+    networks:
+      - merchant-network

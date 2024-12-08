@@ -28,6 +28,8 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
+      inventory_service_db:
+        condition: service_healthy
 
   payment_service:
     container_name: merchant-payment-service
@@ -49,6 +51,8 @@ services:
       - merchant-network
     depends_on:
       rabbitmq:
+        condition: service_healthy
+      payment_service_db:
         condition: service_healthy
     healthcheck:
         test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
@@ -75,6 +79,8 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
+      user_service_db:
+        condition: service_healthy
 
   notification_service:
     container_name: merchant-notification-service
@@ -94,20 +100,4 @@ services:
       - merchant-network
     depends_on:
       rabbitmq:
-        condition: service_healthy
-
-
-
-  stripe-cli:
-    image: stripe/stripe-cli:latest
-    container_name: stripe-cli
-    environment:
-      STRIPE_API_KEY: ${STRIPE_SECRET_KEY}  
-      STRIPE_DEVICE_NAME: "StripeCLI-Dev"
-    entrypoint: ["stripe", "listen", "--api-key", "${STRIPE_SECRET_KEY}", "--forward-to", "http://api_gateway:8080/api/payment/Stripe/web-hook/register-web-hook-event"]
-    networks:
-      - merchant-network
-    restart: unless-stopped
-    depends_on:
-      payment_service:
         condition: service_healthy
