@@ -148,19 +148,6 @@ services:
       rabbitmq:
         condition: service_healthy
 
-  migrations_service:
-    build:
-      context: .
-      dockerfile: MigrationsConfig/Dockerfile
-    environment:
-      - INVENTORY_POSTGRES_SQL_CONNECTION=${POSTGRES_SQL_CONNECTION_DOCKER}
-      - PAYMENT_POSTGRES_SQL_CONNECTION=${POSTGRES_SQL_CONNECTION_DOCKER}
-      - USER_POSTGRES_SQL_CONNECTION=${POSTGRES_SQL_CONNECTION_DOCKER}
-    networks:
-      - merchant-network
-    depends_on:
-      - postgres
-
 networks:
   merchant-network:
     driver: bridge

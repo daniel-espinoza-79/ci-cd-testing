@@ -23,10 +23,11 @@ COPY MerchantCommon/RabbitMqMessaging/. /app/MerchantCommon/RabbitMqMessaging/
 COPY MerchantCommon/Commons/. /app/MerchantCommon/Commons/
 
 RUN dotnet publish -c Release -o /app/out
-RUN dotnet tool install --global dotnet-ef
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
+
 COPY --from=build /app/out .
+COPY InventoryService/src/InventoryService.Api/Migrations Migrations
 EXPOSE 8080
 ENTRYPOINT ["dotnet", "InventoryService.Api.dll"]
