@@ -29,7 +29,7 @@ jobs:
           context: merchant-api/
           file: ./merchant-api/InventoryService/Dockerfile
           push: true
-          tags: danielespinoza/inventory-service:v1.0.1
+          tags: danielespinoza/inventory-service:v1.0.2
 
       - name: Build and push payment-service image
         uses: docker/build-push-action@v4

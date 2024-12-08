@@ -13,7 +13,7 @@ services:
 
   inventory_service:
     container_name: merchant-inventory-service
-    image: danielespinoza/inventory-service:v1.0.1
+    image: danielespinoza/inventory-service:v1.0.2
     ports:
       - "5200:8080"
     environment:
