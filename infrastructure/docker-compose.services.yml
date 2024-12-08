@@ -1,19 +1,21 @@
 services:
   api_gateway:
-    image: danielespinoza/api-gateway:v1.0.0
+    image: danielespinoza/api-gateway:v1.0.1
     ports:
       - "5001:8080"
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - AUTH_JWT_AUTHORITY=${AUTH_JWT_AUTHORITY}
       - AUTH_JWT_AUDIENCE=${AUTH_JWT_AUDIENCE}
     networks:
       - merchant-network
 
   inventory_service:
-    image: danielespinoza/inventory-service:v1.0.0
+    image: danielespinoza/inventory-service:v1.0.1
     ports:
       - "5200:8080"
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - POSTGRES_SQL_CONNECTION=${INVENTORY_SERVICE_CONNECTION_STRING}
       - RABBITMQ_CONNECTION_STRING=${RABBITMQ_CONNECTION_STRING}
       - RABBITMQ_USER=${RABBITMQ_USER}
@@ -26,10 +28,11 @@ services:
         condition: service_healthy
 
   payment_service:
-    image: danielespinoza/payment-service:v1.0.0
+    image: danielespinoza/payment-service:v1.0.1
     ports:
       - "5300:8080"
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - POSTGRES_SQL_CONNECTION=${PAYMENT_SERVICE_CONNECTION_STRING}
       - INVENTORY_SERVICE_ROUTE=${INVENTORY_SERVICE_ROUTE}
       - ORIGIN_ROUTE=${ORIGIN_ROUTE}
@@ -46,10 +49,11 @@ services:
         condition: service_healthy
 
   user_service:
-    image: danielespinoza/user-service:v1.0.0
+    image: danielespinoza/user-service:v1.0.1
     ports:
       - "5100:8080"
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - POSTGRES_SQL_CONNECTION=${USER_SERVICE_CONNECTION_STRING}
       - FIREBASE_CREDENTIALS=${FIREBASE_CREDENTIALS}
       - RABBITMQ_CONNECTION_STRING=${RABBITMQ_CONNECTION_STRING}
@@ -63,10 +67,11 @@ services:
         condition: service_healthy
 
   notification_service:
-    image: danielespinoza/notification-service:v1.0.0
+    image: danielespinoza/notification-service:v1.0.1
     ports:
       - "5400:8080"
     environment:
+      - ASPNETCORE_ENVIRONMENT=Development
       - EMAIL_USERNAME=${EMAIL_USERNAME}
       - EMAIL_PASSWORD=${EMAIL_PASSWORD}
       - EMAIL_SERVICE=${EMAIL_SERVICE}
