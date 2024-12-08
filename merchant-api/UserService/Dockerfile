@@ -24,8 +24,8 @@ RUN dotnet publish -c Release -o /app/out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=build /app/out .
 COPY UserService/src/UserService.Api/Migrations Migrations
+COPY --from=build /app/out .
 
 EXPOSE 8080
 ENTRYPOINT ["dotnet", "UserService.Api.dll"]
