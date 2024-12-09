@@ -59,8 +59,8 @@ jobs:
       - name: Build and push merchant-web image
         uses: docker/build-push-action@v4
         with:
-          context: apps/merchant-web
-          file: ./apps/merchant-web/Dockerfile
+          context: merchant-web
+          file: ./merchant-web/Dockerfile
           push: true
           tags: danielespinoza/merchant-web:v1.0.0
           build-args: |
