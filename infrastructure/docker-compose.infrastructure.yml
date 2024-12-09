@@ -83,7 +83,6 @@ services:
       - merchant-network
 
 
-
   stripe-cli:
     image: stripe/stripe-cli:latest
     container_name: stripe-cli
